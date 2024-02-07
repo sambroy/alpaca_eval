@@ -38,6 +38,16 @@ CUR_DIR = Path(__file__).parent
 __all__ = ["evaluate", "evaluate_from_model", "analyze_evaluators", "make_leaderboard"]
 
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ["yes", "true", "t", "y", "1"]:
+        return True
+    elif v.lower() in ["no", "false", "f", "n", "0"]:
+        return False
+    else:
+        raise argparse.ArgumentTypeError("Boolean value expected.")
+
 def parse_args():
     # Create the argument parser
     parser = argparse.ArgumentParser()
@@ -45,7 +55,7 @@ def parse_args():
     # Define arguments based on the YAML spec
     # For inputs; here the inputs are model and reference model outputs.
     parser.add_argument("--model_outputs", type=str, help="Path to the directory containing the model outputs", required=False)
-    parser.add_argument("--use_alpaca_eval_1", type=bool, help="Whether to use the alpaca_eval_1", required=False, default=False)
+    parser.add_argument("--use_alpaca_eval_1", type=str2bool, help="Whether to use the alpaca_eval_1 or eval_2; by default set to False.", required=False, default=False)
 
     # For outputs
     parser.add_argument("--output_dir", type=str, help="Output directory")
@@ -75,6 +85,13 @@ def stage2_main():
         annotator_config_file = "alpaca_eval_gpt4"
     else:
         annotator_config_file = "weighted_alpaca_eval_gpt4_turbo"
+    
+    # hardcoding it to check on AML first.
+    annotator_config_file = "weighted_alpaca_eval_gpt4_turbo"
+
+    
+
+    logging.info(f"Using annotator_config_file = {annotator_config_file}")
 
 
     # convert from json to pandas dataframe; this is what the evaluate function expects
