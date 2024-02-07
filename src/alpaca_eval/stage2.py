@@ -86,10 +86,8 @@ def stage2_main():
     else:
         annotator_config_file = "weighted_alpaca_eval_gpt4_turbo"
     
-    # hardcoding it to check on AML first.
-    annotator_config_file = "weighted_alpaca_eval_gpt4_turbo"
-
-    
+    # # hardcoding it to check on AML first.
+    # annotator_config_file = "weighted_alpaca_eval_gpt4_turbo"
 
     logging.info(f"Using annotator_config_file = {annotator_config_file}")
 
