@@ -235,6 +235,8 @@ def ALPACAFARM_ALL_OUTPUTS():
 ### In the keyvault of the AML workspace, we have a secret called
 ### "AlpacaGPT4Key" which contains the API key for the GPT-4-1106 model
 ### and also a secret called "AlpacaGPT40613Key" which contains the API key for the GPT-4-0613 model
-GPT4_API_KEY = "AlpacaGPT40613Key"
+
+# GPT4_API_KEY = "AlpacaGPT40613Key"
+GPT4_API_KEY = "AlpacaGPT4Key"
 
 assert GPT4_API_KEY in ["AlpacaGPT40613Key", "AlpacaGPT4Key"]
