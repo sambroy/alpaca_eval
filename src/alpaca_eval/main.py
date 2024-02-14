@@ -269,9 +269,11 @@ def evaluate_from_model(
 
     logging.info(f"Number of rows in evaluation dataset = {len(df_dataset)}")
 
-    ## for debugging, keep only 15 rows.
+    ## for debug mode
     if debug_len > 0:
         df_dataset = df_dataset.head(debug_len)
+
+    logging.info(f"Using {len(df_dataset)} rows for evaluation.")
 
     if chunksize is not None and not is_load_outputs:
         logging.info("`is_load_outputs` has to be true to use chunksize. Setting it to True.")
