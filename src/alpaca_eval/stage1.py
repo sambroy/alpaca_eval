@@ -58,6 +58,9 @@ def stage1_main():
     if args.model_path is not None:
         ae_model_config[model_name]["completions_kwargs"]["model_name"] = args.model_path
 
+    # trust remote code. safe since posttrain uses azure blob hosted models only.
+    ae_model_config[model_name]["completions_kwargs"]["model_kwargs"]["trust_remote_code"] = True
+
     logging.info(f"Model Configs = \n{ae_model_config}")
     # else go with the default AE config and model on HF.
 
