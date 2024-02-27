@@ -50,13 +50,16 @@ def stage1_main():
     ##      - pick up the appropriate model_config from the model_configs folder according to the model_config parameter
     ##      - we will change the model_name field to point to the model_path 
     ##      - use this model_config dict to pass to the evaluate_from_model
+    ##      - raise an error if model path is None.
 
     ae_model_config = utils.load_configs(model_config, relative_to=constants.MODELS_CONFIG_DIR)
 
     # get name of model 
     model_name = list(ae_model_config.keys())[0]
-    if args.model_path is not None:
-        ae_model_config[model_name]["completions_kwargs"]["model_name"] = args.model_path
+
+    assert args.model_path is not None, "Error: Model path is required!"
+
+    ae_model_config[model_name]["completions_kwargs"]["model_name"] = args.model_path
 
     # trust remote code. safe since posttrain uses azure blob hosted models only.
     ae_model_config[model_name]["completions_kwargs"]["model_kwargs"]["trust_remote_code"] = True
